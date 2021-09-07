@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'coin-detail', component: CoinDetailComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
