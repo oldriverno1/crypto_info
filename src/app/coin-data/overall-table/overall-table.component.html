@@ -5,7 +5,7 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">名稱</th>
-          <th scope="col">價格(新台幣)</th>
+          <th scope="col">價格</th>
           <th scope="col">24h%</th>
           <th scope="col">7d%</th>
           <th scope="col">市值</th>
@@ -14,8 +14,12 @@
       <tbody>
         <tr *ngFor="let currencyTicker of currencyTickers; index as i">
           <th scope="row">{{ i + 1 }}</th>
-          <td> <img class="coin-logo mr-1" [src]="currencyTicker.logo_url">{{ currencyTicker.currency }}</td>
-          <td>{{ currencyTicker.price }}</td>
+          <td>
+            <img class="coin-logo mr-1" [src]="currencyTicker.logo_url" />{{
+              currencyTicker.name
+            }}&nbsp;<span class="light-gray">{{ currencyTicker.symbol }}</span>
+          </td>
+          <td>NT${{ currencyTicker.price | priceFormat }}</td>
           <td>@mdo</td>
           <td>Larry</td>
           <td>the Bird</td>

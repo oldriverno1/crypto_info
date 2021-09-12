@@ -1,3 +1,4 @@
+import { ShareModule } from './../share/share.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoinDetailComponent } from './coin-detail/coin-detail.component';
@@ -5,6 +6,6 @@ import { OverallTableComponent } from './overall-table/overall-table.component';
 
 @NgModule({
   declarations: [CoinDetailComponent, OverallTableComponent],
-  imports: [CommonModule],
+  imports: [CommonModule,ShareModule],
 })
 export class CoinDataModule {}
