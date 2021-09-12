@@ -1,3 +1,5 @@
+import { CoinDataModule } from './coin-data/coin-data.module';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,8 +17,10 @@ import { PriceMarqueeComponent } from './price-marquee/price-marquee.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CoinDataModule
   ],
   providers: [],
   bootstrap: [AppComponent]
