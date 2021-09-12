@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService, API_SOURCE } from 'src/app/core/backend.service';
-
+import { faCaretUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-overall-table',
   templateUrl: './overall-table.component.html',
@@ -8,6 +8,7 @@ import { BackendService, API_SOURCE } from 'src/app/core/backend.service';
 })
 export class OverallTableComponent implements OnInit {
   constructor(private backendService: BackendService) {}
+  readonly faCaretUp : IconDefinition= faCaretUp;
   currencyTickers!: CurrencyTickersResp[];
   ngOnInit(): void {
     this.backendService
