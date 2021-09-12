@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PriceFormatPipe } from './price-format.pipe';
+import { numberFormatPipe } from './pipes/number-format/number-format.pipe';
+import { StringToNumberPipe } from './pipes/string-to-number/string-to-number.pipe';
 
 @NgModule({
-  declarations: [PriceFormatPipe],
+  declarations: [numberFormatPipe, StringToNumberPipe],
   imports: [CommonModule],
-  exports: [PriceFormatPipe],
+  exports: [numberFormatPipe, StringToNumberPipe],
 })
 export class ShareModule {}

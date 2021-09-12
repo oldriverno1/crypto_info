@@ -19,8 +19,31 @@
               currencyTicker.name
             }}&nbsp;<span class="light-gray">{{ currencyTicker.symbol }}</span>
           </td>
-          <td>NT${{ currencyTicker.price | priceFormat }}</td>
-          <td><fa-icon [icon]="faCaretUp"></fa-icon></td>
+          <td>NT${{ currencyTicker.price | numberFormat }}</td>
+          <td>
+            <fa-icon
+              class="price-up mr-1"
+              *ngIf="
+                (currencyTicker['1d'].price_change_pct | stringToNumber: 'float') > 0;
+                else arrowDown
+              "
+              [icon]="faCaretUp"
+            ></fa-icon>
+            <ng-template #arrowDown>
+              <fa-icon class="price-down mr-1" [icon]="faCaretDown"></fa-icon>
+            </ng-template>
+            <span
+              [class]="
+                (currencyTicker['1d'].price_change_pct | stringToNumber: 'float') > 0
+                  ? 'price-up'
+                  : 'price-down'
+              "
+              >{{
+                (currencyTicker['1d'].price_change_pct | stringToNumber: 'float') * 100
+                  | numberFormat
+              }}%</span
+            >
+          </td>
           <td>Larry</td>
           <td>the Bird</td>
           <td>@twitter</td>
