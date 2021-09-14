@@ -8,8 +8,8 @@ export class numberFormatPipe implements PipeTransform {
     if (typeof b4FormatPrice == 'string') {
       return parseFloat(b4FormatPrice)
         .toFixed(2)
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',').toString();
     }
-    return b4FormatPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return b4FormatPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',').toString();
   }
 }
