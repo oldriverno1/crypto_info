@@ -8,19 +8,19 @@
           <th scope="col" class="text-right">價格</th>
           <th scope="col" class="text-right">24h%</th>
           <th scope="col" class="text-right">7d%</th>
-          <th scope="col">市值</th>
+          <th scope="col" class="text-right">市值</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let currencyTicker of currencyTickers; index as i">
           <th scope="row">{{ i + 1 }}</th>
-          <td class="text-nowrap stick-left">
+          <td class="text-nowrap stick-left" width="5%">
             <img class="coin-logo mr-1" [src]="currencyTicker.logo_url" />{{
               currencyTicker.name
             }}&nbsp;<span class="light-gray">{{ currencyTicker.symbol }}</span>
           </td>
           <td class="text-right">NT${{ currencyTicker.price | numberFormat }}</td>
-          <td class="text-nowrap">
+          <td class="text-nowrap text-right">
             <fa-icon
               class="price-up mr-1"
               *ngIf="
@@ -44,7 +44,7 @@
               }}%</span
             >
           </td>
-          <td class="text-nowrap">
+          <td class="text-nowrap text-right">
             <fa-icon
               class="price-up mr-1"
               *ngIf="
@@ -68,7 +68,7 @@
               }}%</span
             >
           </td>
-          <td>NT${{ currencyTicker.market_cap | numberFormat }}</td>
+          <td class="text-right">NT${{ currencyTicker.market_cap | numberFormat }}</td>
         </tr>
       </tbody>
     </table>
