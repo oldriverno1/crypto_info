@@ -46,7 +46,7 @@ export class BackendService {
       .get<T>(apiSource + apiName, { params: params as unknown as HttpParams })
       .pipe(
         catchError((err) => {
-          alert(`發生網路問題[${apiSource + apiName}] Error Code: ${err.status}`);
+          alert(`發生網路問題[${apiSource + apiName}]`);
           throw new Error(`發生網路問題 Error Code: ${err.status}`);
         })
       );

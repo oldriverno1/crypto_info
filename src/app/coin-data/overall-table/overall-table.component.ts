@@ -8,12 +8,35 @@ import { faCaretDown, faCaretUp, IconDefinition } from '@fortawesome/free-solid-
 })
 export class OverallTableComponent implements OnInit {
   constructor(private backendService: BackendService) {}
-  readonly faCaretUp : IconDefinition= faCaretUp;
-  readonly faCaretDown : IconDefinition= faCaretDown;
+  readonly totalDatas: number = 9815;
+  readonly dataPerPage: number = 10;
+  readonly faCaretUp: IconDefinition = faCaretUp;
+  readonly faCaretDown: IconDefinition = faCaretDown;
+  currentPage!: number;
   currencyTickers!: CurrencyTickersResp[];
   ngOnInit(): void {
+    this.getData(1);
+  }
+
+  getLastPage(): number {
+    return Math.ceil(this.totalDatas / this.dataPerPage);
+  }
+
+  getData(pageIndex: number): void {
+    const currencyTickersRequest: CurrencyTickersRequest = {
+      'per-page': this.dataPerPage,
+      convert: 'TWD',
+      page: pageIndex,
+      status: 'active',
+      interval: '1d,7d',
+    };
+    this.currentPage = pageIndex;
     this.backendService
-      .get<CurrencyTickersResp[]>(API_SOURCE.NOMICS, 'currencies/ticker', { 'per-page': 10,convert:'TWD'})
+      .get<CurrencyTickersResp[]>(
+        API_SOURCE.NOMICS,
+        'currencies/ticker',
+        currencyTickersRequest as Record<string, unknown>
+      )
       .subscribe((data) => {
         console.log(data);
         this.currencyTickers = data;
@@ -57,14 +80,14 @@ export interface CurrencyTickersResp {
   high_timestamp: Date;
   '1d': IntervalDetail;
   '7d': IntervalDetail;
-  '30d': IntervalDetail;
-  '365d': IntervalDetail;
+  '30d'?: IntervalDetail;
+  '365d'?: IntervalDetail;
   ytd: IntervalDetail;
 }
 
 export interface CurrencyTickersRequest {
   ids?: string;
-  interval?: '1h' | '1d' | '7d' | '30d' | '365d' | 'ytd';
+  interval?: string;
   convert?: string;
   status?: 'active' | 'inactive' | 'dead';
   filter?: 'any' | 'new';
