@@ -6,21 +6,21 @@
           <th scope="col">#</th>
           <th scope="col" class="stick-left">名稱</th>
           <th scope="col" class="text-right">價格</th>
-          <th scope="col" class="text-right">24h%</th>
           <th scope="col" class="text-right">7d%</th>
+          <th scope="col" class="text-right">7d交易量</th>
           <th scope="col" class="text-right">市值</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let currencyTicker of currencyTickers; index as i">
-          <th scope="row">{{ i + 1 }}</th>
+          <th scope="row">{{ currencyTicker.rank }}</th>
           <td class="text-nowrap stick-left" width="5%">
             <img class="coin-logo mr-1" [src]="currencyTicker.logo_url" />{{
               currencyTicker.name
             }}&nbsp;<span class="light-gray">{{ currencyTicker.symbol }}</span>
           </td>
           <td class="text-right">NT${{ currencyTicker.price | numberFormat }}</td>
-          <td class="text-nowrap text-right">
+          <!-- <td class="text-nowrap text-right">
             <fa-icon
               class="price-up mr-1"
               *ngIf="
@@ -43,7 +43,7 @@
                   | numberFormat
               }}%</span
             >
-          </td>
+          </td> -->
           <td class="text-nowrap text-right">
             <fa-icon
               class="price-up mr-1"
@@ -68,6 +68,7 @@
               }}%</span
             >
           </td>
+          <td class="text-right">NT${{ currencyTicker['7d'].volume | numberFormat }}</td>
           <td class="text-right">NT${{ currencyTicker.market_cap | numberFormat }}</td>
         </tr>
       </tbody>
@@ -86,19 +87,21 @@
         </a>
       </li>
       <li
-        *ngFor="let item of [].constructor(5); index as i"
+        *ngFor="let item of getPagination(); index as i"
         class="page-item"
-        [class.active]="currentPage + i === currentPage"
+        [class.active]="currentPage === item"
       >
-        <a class="page-link pointer" (click)="getData(currentPage + i)">{{ currentPage + i }}</a>
+        <a class="page-link pointer" (click)="getData(item)">{{ item }}</a>
       </li>
-      <li class="page-item">
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
         <a class="page-link pointer" (click)="getData(currentPage + 1)" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
         </a>
       </li>
-      <li class="page-item" *ngIf="currentPage !== getLastPage()"><a class="page-link pointer" (click)="getData(getLastPage())">last</a></li>
+      <li class="page-item" *ngIf="currentPage !== totalPages">
+        <a class="page-link pointer" (click)="getData(totalPages)">last</a>
+      </li>
     </ul>
   </nav>
 </div>

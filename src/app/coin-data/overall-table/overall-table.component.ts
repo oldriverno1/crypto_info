@@ -8,7 +8,7 @@ import { faCaretDown, faCaretUp, IconDefinition } from '@fortawesome/free-solid-
 })
 export class OverallTableComponent implements OnInit {
   constructor(private backendService: BackendService) {}
-  readonly totalDatas: number = 9815;
+  readonly totalPages: number = 80;
   readonly dataPerPage: number = 10;
   readonly faCaretUp: IconDefinition = faCaretUp;
   readonly faCaretDown: IconDefinition = faCaretDown;
@@ -18,17 +18,12 @@ export class OverallTableComponent implements OnInit {
     this.getData(1);
   }
 
-  getLastPage(): number {
-    return Math.ceil(this.totalDatas / this.dataPerPage);
-  }
-
   getData(pageIndex: number): void {
     const currencyTickersRequest: CurrencyTickersRequest = {
       'per-page': this.dataPerPage,
       convert: 'TWD',
       page: pageIndex,
       status: 'active',
-      interval: '1d,7d',
     };
     this.currentPage = pageIndex;
     this.backendService
@@ -41,6 +36,13 @@ export class OverallTableComponent implements OnInit {
         console.log(data);
         this.currencyTickers = data;
       });
+  }
+
+  getPagination(): number[] {
+    const pageSlideSize = 5;
+    return [...Array(pageSlideSize).keys()].map(
+      (value) => value + Math.floor((this.currentPage - 1) / pageSlideSize) * pageSlideSize + 1
+    );
   }
 }
 
