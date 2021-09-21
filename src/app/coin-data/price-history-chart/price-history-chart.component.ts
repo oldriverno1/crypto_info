@@ -9,19 +9,22 @@ import { KlineRequest, KlineResponseIndex } from '../coin-detail/coin-detail.com
 })
 export class PriceHistoryChartComponent implements OnInit {
   constructor(private backendService: BackendService) {}
-  Highcharts: typeof Highcharts = Highcharts; // required
+  readonly highcharts: typeof Highcharts = Highcharts; // required
   updateFlag = false;
   chartOptions: Highcharts.Options = {
-    series: [
-      {
-        data: [2, 4],
-        type: 'line',
-      },
-    ],
+    title: { text: 'BTC-USDT' },
+    credits: { enabled: false },
+    series: [{ data: [], type: 'line' }],
+    yAxis: { opposite: true, title: { text: '價格' } },
   };
 
   ngOnInit(): void {
+    this.beforeChartInit();
     this.getPriceData();
+  }
+
+  private beforeChartInit(): void {
+    this.highcharts.setOptions({ lang: { thousandsSep: ',' } });
   }
 
   private getPriceData(): void {
@@ -29,14 +32,21 @@ export class PriceHistoryChartComponent implements OnInit {
     this.backendService
       .get<(number | string)[][]>(API_SOURCE.BINANCE, 'klines', klineRequest as unknown as Record<string, unknown>)
       .subscribe((priceData) => {
-        const closePrices: number[] = [];
-        for (const data of priceData) {
-          closePrices.push(parseFloat(data[KlineResponseIndex.close] as string));
-        }
-        console.log(closePrices);
-        this.chartOptions.series = [{ data: closePrices, type: 'line', name: 'BTCUSDT' }];
-        this.updateFlag = true;
-        console.log(this.updateFlag);
+        this.plotChart(priceData);
       });
+  }
+
+  private plotChart(priceData: (number | string)[][]): void {
+    const closePrices: number[] = [];
+    const xAxisCategories: string[] = [];
+    for (const data of priceData) {
+      xAxisCategories.push(new Date(data[KlineResponseIndex.closeTime]).toLocaleDateString('zh-Hans-CN'));
+      closePrices.push(parseFloat(data[KlineResponseIndex.close] as string));
+    }
+    console.log(closePrices);
+    this.chartOptions.series = [{ data: closePrices, type: 'line', name: 'BTCUSDT price' }];
+    this.chartOptions.xAxis = { categories: xAxisCategories, tickInterval: 100 };
+    this.updateFlag = true;
+    console.log(this.updateFlag);
   }
 }

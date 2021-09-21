@@ -1,4 +1,3 @@
-import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,15 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coin-detail.component.css'],
 })
 export class CoinDetailComponent implements OnInit {
-  constructor(private backendService: BackendService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    const klineRequest: KlineRequest = { symbol: 'BTCUSDT', interval: '1d' };
-    this.backendService
-      .get<(number | string)[][]>(API_SOURCE.BINANCE, 'klines', klineRequest as unknown as Record<string, unknown>)
-      .subscribe((data) => {
-        console.log(data[0][KlineResponseIndex.close]);
-      });
   }
 }
 
