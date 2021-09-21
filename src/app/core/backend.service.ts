@@ -54,6 +54,6 @@ export class BackendService {
 }
 
 export enum API_SOURCE {
-  BINANCE = 'https://api.binance.com/',
+  BINANCE = 'https://thingproxy.freeboard.io/fetch/https://api.binance.com/api/v3/',
   NOMICS = 'https://api.nomics.com/v1/',
 }
