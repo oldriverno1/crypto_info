@@ -31,7 +31,3 @@ table {
 .table-hover tbody tr:hover th {
   background-color: #e6f0ff;
 }
-
-.pointer {
-  cursor: pointer;
-}

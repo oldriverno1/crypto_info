@@ -10,9 +10,9 @@ export class OverallTableComponent implements OnInit {
   constructor(private backendService: BackendService) {}
   readonly totalPages: number = 80;
   readonly dataPerPage: number = 10;
+  readonly pageSlideSize: number = 5;
   readonly faCaretUp: IconDefinition = faCaretUp;
   readonly faCaretDown: IconDefinition = faCaretDown;
-  currentPage!: number;
   currencyTickers!: CurrencyTickersResp[];
   ngOnInit(): void {
     this.getData(1);
@@ -25,7 +25,6 @@ export class OverallTableComponent implements OnInit {
       page: pageIndex,
       status: 'active',
     };
-    this.currentPage = pageIndex;
     this.backendService
       .get<CurrencyTickersResp[]>(
         API_SOURCE.NOMICS,
@@ -36,13 +35,6 @@ export class OverallTableComponent implements OnInit {
         console.log(data);
         this.currencyTickers = data;
       });
-  }
-
-  getPagination(): number[] {
-    const pageSlideSize = 5;
-    return [...Array(pageSlideSize).keys()].map(
-      (value) => value + Math.floor((this.currentPage - 1) / pageSlideSize) * pageSlideSize + 1
-    );
   }
 }
 
