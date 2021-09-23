@@ -10,12 +10,6 @@ export class BackendService {
   constructor(private httpClient: HttpClient) {}
   private readonly NOMICS_KEY: string = '78f51ac49b5a2f483772daebcf27519e8b59988d';
 
-  /**
-   *
-   * @param webServiceApiName WebService的API名稱
-   * @param params 須送給WebService的內容，格式:Json
-   *
-   */
   post<T>(apiSource: API_SOURCE, apiName: string, params: Record<string, unknown>): Observable<T> {
     return this.httpClient.post<T>(apiSource + apiName, params).pipe(
       catchError((err) => {
@@ -25,18 +19,7 @@ export class BackendService {
     );
   }
 
-  /**
-   *
-   * @param webServiceApiName WebService的API名稱
-   * @param params 送給WebService的內容(可有可無)，格式:Json
-   *
-   * 範例:
-   * ```
-   *   BackendService.get<ReferenceData>('GetReferenceData').subscribe( response => {
-   *     console.log(response);
-   *   });
-   * ```
-   */
+
   get<T>(apiSource: API_SOURCE, apiName: string, params?: Record<string, unknown>): Observable<T> {
     params = {
       ...params,
@@ -54,8 +37,6 @@ export class BackendService {
 }
 
 export enum API_SOURCE {
-  //dev mode: https://thingproxy.freeboard.io/fetch/https://api.binance.com/api/v3/
-  //prod mode: https://cors-anywhere.herokuapp.com/https://api.binance.com/api/v3/
-  BINANCE = 'https://thingproxy.freeboard.io/fetch/https://api.binance.com/api/v3/',
+  BINANCE = 'https://oldriverno1-proxy.herokuapp.com/https://api.binance.com/api/v3/',
   NOMICS = 'https://api.nomics.com/v1/',
 }
