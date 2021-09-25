@@ -9,6 +9,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { DescriptionBlockComponent } from './description-block/description-block.component';
 @NgModule({
   declarations: [CoinDetailComponent, OverallTableComponent, PriceHistoryChartComponent, DescriptionBlockComponent],
-  imports: [CommonModule, FontAwesomeModule, ShareModule, HighchartsChartModule],
+  imports: [CommonModule, FontAwesomeModule, ShareModule, HighchartsChartModule,ShareModule],
 })
 export class CoinDataModule {}

@@ -1,0 +1,12 @@
+.title{
+  color: rgba(0,0,0,.5);
+  font-size: 1.75rem;
+}
+
+.price-up{
+  color: rgb(0, 224, 142);
+}
+
+.price-drop{
+  color: rgb(255, 0, 21);
+}

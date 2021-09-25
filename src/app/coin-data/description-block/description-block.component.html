@@ -1,13 +1,65 @@
+<span class="title ml-2">價格變化</span>
 <table class="table">
-
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
+      <th scope="row">1d change</th>
+      <td class="text-right">
+        <span
+          *ngIf="coinTicker?.['1d']"
+          [class]="(coinTicker['1d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
+        >
+          <fa-icon
+            class="mr-1"
+            [icon]="(coinTicker['1d'].price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
+          ></fa-icon>
+          {{ coinTicker['1d'].price_change_pct }}%</span
+        >
+      </td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
+      <th scope="row">7d change</th>
+      <td class="text-right">
+        <span
+          *ngIf="coinTicker?.['7d']"
+          [class]="(coinTicker['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
+        >
+          <fa-icon
+            class="mr-1"
+            [icon]="(coinTicker['7d'].price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
+          ></fa-icon
+          >{{ coinTicker['7d'].price_change_pct }}%</span
+        >
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">30d change</th>
+      <td class="text-right">
+        <span
+          *ngIf="coinTicker?.['30d']"
+          [class]="(coinTicker['30d']!.price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
+        >
+          <fa-icon
+            class="mr-1"
+            [icon]="(coinTicker['30d']!.price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
+          ></fa-icon
+          >{{ coinTicker['30d']!.price_change_pct }}%</span
+        >
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">365d change</th>
+      <td class="text-right">
+        <span
+          *ngIf="coinTicker?.['365d']"
+          [class]="(coinTicker['365d']!.price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
+        >
+          <fa-icon
+            class="mr-1"
+            [icon]="(coinTicker['365d']!.price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
+          ></fa-icon
+          >{{ coinTicker['365d']!.price_change_pct }}%</span
+        >
+      </td>
     </tr>
   </tbody>
 </table>
