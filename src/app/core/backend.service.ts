@@ -7,7 +7,7 @@ import { catchError, delay, mergeMap, retryWhen, take } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class BackendService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
   private readonly NOMICS_KEY: string = '78f51ac49b5a2f483772daebcf27519e8b59988d';
   private readonly TOO_MANY_REQUESTS: number = 429;
   post<T>(apiSource: API_SOURCE, apiName: string, params: Record<string, unknown>): Observable<T> {
@@ -19,27 +19,26 @@ export class BackendService {
     );
   }
 
-
   get<T>(apiSource: API_SOURCE, apiName: string, params?: Record<string, unknown>): Observable<T> {
     params = {
       ...params,
       ...(apiSource === API_SOURCE.NOMICS && { key: this.NOMICS_KEY }),
     };
-    return this.httpClient
-      .get<T>(apiSource + apiName, { params: params as unknown as HttpParams })
-      .pipe(
-        retryWhen(observable => {
-          return observable.pipe(
-            mergeMap((error: HttpErrorResponse) => {
-              if (error.status === this.TOO_MANY_REQUESTS) {
-                return of(error).pipe(delay(1000));
-              }
-              console.error(error);
-              throw new Error(`error with api: ${apiSource + apiName}`);
-            }), take(2)
-          );
-        })
-      );
+    return this.httpClient.get<T>(apiSource + apiName, { params: params as unknown as HttpParams }).pipe(
+      retryWhen((observable) => {
+        return observable.pipe(
+          mergeMap((error: HttpErrorResponse) => {
+            if (error.status === this.TOO_MANY_REQUESTS) {
+              return of(error).pipe(delay(1000));
+            }
+            console.error(error);
+            alert(`error with api: ${apiSource + apiName}`);
+            throw new Error(`error with api: ${apiSource + apiName}`);
+          }),
+          take(2)
+        );
+      })
+    );
   }
 }
 
