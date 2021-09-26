@@ -1,14 +1,14 @@
-import { CurrencyTickersRequest, CurrencyTickersResp } from './../../interfaces/currency-ticker';
+import { CurrencyTickersRequest, CurrencyTickersResp } from '../../interfaces/currency-ticker';
 import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-description-block',
-  templateUrl: './description-block.component.html',
-  styleUrls: ['./description-block.component.css'],
+  selector: 'app-price-change',
+  templateUrl: './price-change.component.html',
+  styleUrls: ['./price-change.component.css'],
 })
-export class DescriptionBlockComponent implements OnInit {
+export class PriceChangeComponent implements OnInit {
   constructor(private backendService: BackendService) {}
   readonly faCaretUp: IconDefinition = faCaretUp;
   readonly faCaretDown: IconDefinition = faCaretDown;
