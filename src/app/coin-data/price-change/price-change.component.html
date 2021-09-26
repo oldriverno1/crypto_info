@@ -12,7 +12,7 @@
             class="mr-1"
             [icon]="(coinTicker['1d'].price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
           ></fa-icon>
-          {{ coinTicker['1d'].price_change_pct }}%</span
+          {{ (coinTicker['1d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
         >
       </td>
     </tr>
@@ -27,7 +27,7 @@
             class="mr-1"
             [icon]="(coinTicker['7d'].price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
           ></fa-icon
-          >{{ coinTicker['7d'].price_change_pct }}%</span
+          >{{ (coinTicker['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
         >
       </td>
     </tr>
@@ -42,7 +42,7 @@
             class="mr-1"
             [icon]="(coinTicker['30d']!.price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
           ></fa-icon
-          >{{ coinTicker['30d']!.price_change_pct }}%</span
+          >{{ (coinTicker['30d']!.price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
         >
       </td>
     </tr>
@@ -57,7 +57,7 @@
             class="mr-1"
             [icon]="(coinTicker['365d']!.price_change_pct | stringToNumber: 'float') > 0 ? faCaretUp : faCaretDown"
           ></fa-icon
-          >{{ coinTicker['365d']!.price_change_pct }}%</span
+          >{{ (coinTicker['365d']!.price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
         >
       </td>
     </tr>
