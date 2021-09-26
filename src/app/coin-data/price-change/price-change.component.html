@@ -5,7 +5,7 @@
       <th scope="row">1d change</th>
       <td class="text-right">
         <span
-          *ngIf="coinTicker?.['1d']"
+          *ngIf="coinTicker?.['1d'];else noData"
           [class]="(coinTicker['1d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
         >
           <fa-icon
@@ -20,7 +20,7 @@
       <th scope="row">7d change</th>
       <td class="text-right">
         <span
-          *ngIf="coinTicker?.['7d']"
+          *ngIf="coinTicker?.['7d'];else noData"
           [class]="(coinTicker['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
         >
           <fa-icon
@@ -35,7 +35,7 @@
       <th scope="row">30d change</th>
       <td class="text-right">
         <span
-          *ngIf="coinTicker?.['30d']"
+          *ngIf="coinTicker?.['30d'];else noData"
           [class]="(coinTicker['30d']!.price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
         >
           <fa-icon
@@ -50,7 +50,7 @@
       <th scope="row">365d change</th>
       <td class="text-right">
         <span
-          *ngIf="coinTicker?.['365d']"
+          *ngIf="coinTicker?.['365d'];else noData"
           [class]="(coinTicker['365d']!.price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-drop'"
         >
           <fa-icon
@@ -63,3 +63,4 @@
     </tr>
   </tbody>
 </table>
+<ng-template #noData>尚無資料</ng-template>

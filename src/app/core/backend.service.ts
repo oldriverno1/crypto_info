@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { catchError, delay, mergeMap, retryWhen, take } from 'rxjs/operators';
-
+import { webSocket } from 'rxjs/webSocket';
 @Injectable({
   providedIn: 'root',
 })
@@ -40,9 +40,20 @@ export class BackendService {
       })
     );
   }
+
+  binanceWebSokcet<T>(socketName: string): Observable<T> {
+    return webSocket<T>(API_SOURCE.BINANCE_SOCKET + socketName).pipe(
+      catchError((error) => {
+        console.error(error);
+        alert(`websocket error: ${API_SOURCE.BINANCE_SOCKET + socketName}`);
+        throw new Error(`websocket error: ${API_SOURCE.BINANCE_SOCKET + socketName}`);
+      })
+    );
+  }
 }
 
 export enum API_SOURCE {
   BINANCE = 'https://oldriverno1-proxy.herokuapp.com/https://api.binance.com/api/v3/',
   NOMICS = 'https://api.nomics.com/v1/',
+  BINANCE_SOCKET = 'wss://stream.binance.com:9443',
 }
