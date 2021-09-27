@@ -1,8 +1,9 @@
 <div class="card">
-  <h5 class="card-header">關於 {{coinMetaData?.name}}</h5>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+  <h5 class="card-header">About {{coinMetaData?.name}}</h5>
+  <div class="card-body module">
+    <!-- <h5 class="card-title">Special title treatment</h5> -->
+    <p class="card-text collapse" id="description-collapse" aria-expanded="false">{{coinMetaData?.description}}</p>
+    <a role="button" class="collapsed" data-toggle="collapse" href="#description-collapse"
+    aria-expanded="false" aria-controls="description-collapse"></a>
   </div>
 </div>

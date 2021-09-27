@@ -44,10 +44,8 @@ export class PriceHistoryChartComponent implements OnInit {
       xAxisCategories.push(new Date(data[KlineResponseIndex.closeTime]).toLocaleDateString('zh-Hans-CN'));
       closePrices.push(parseFloat(data[KlineResponseIndex.close] as string));
     }
-    console.log(closePrices);
     this.chartOptions.series = [{ data: closePrices, type: 'line', name: 'BTCUSDT price' }];
     this.chartOptions.xAxis = { categories: xAxisCategories, tickInterval: 100 };
     this.updateFlag = true;
-    console.log(this.updateFlag);
   }
 }
