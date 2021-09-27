@@ -8,8 +8,9 @@ import { PriceHistoryChartComponent } from './price-history-chart/price-history-
 import { HighchartsChartModule } from 'highcharts-angular';
 import { PriceChangeComponent } from './price-change/price-change.component';
 import { MarketCapComponent } from './market-cap/market-cap.component';
+import { DescriptionBlockComponent } from './description-block/description-block.component';
 @NgModule({
-  declarations: [CoinDetailComponent, OverallTableComponent, PriceHistoryChartComponent, PriceChangeComponent, MarketCapComponent],
+  declarations: [CoinDetailComponent, OverallTableComponent, PriceHistoryChartComponent, PriceChangeComponent, MarketCapComponent, DescriptionBlockComponent],
   imports: [CommonModule, FontAwesomeModule, ShareModule, HighchartsChartModule,ShareModule],
 })
 export class CoinDataModule {}

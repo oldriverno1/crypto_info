@@ -3,19 +3,29 @@
   <tbody>
     <tr>
       <th scope="row">市值排名</th>
-      <td class="text-right">{{ coinTicker.rank }}</td>
+      <td class="text-right">
+        <span *ngIf="coinTicker; else noData">{{ coinTicker.rank }}</span>
+      </td>
     </tr>
     <tr>
       <th scope="row">市值</th>
-      <td class="text-right">NT${{ coinTicker.market_cap | numberFormat }}</td>
+      <td class="text-right">
+        <span *ngIf="coinTicker; else noData">NT$ {{ coinTicker.market_cap | numberFormat }}</span>
+      </td>
     </tr>
     <tr>
       <th scope="row">最大供給量</th>
-      <td class="text-right">{{ coinTicker.max_supply | numberFormat }}</td>
+      <td class="text-right">
+        <span *ngIf="coinTicker; else noData">NT$ {{ coinTicker.max_supply | numberFormat }}</span>
+      </td>
     </tr>
     <tr>
       <th scope="row">現貨流通量</th>
-      <td class="text-right">{{ coinTicker.circulating_supply | numberFormat }}</td>
+      <td class="text-right">
+        <span *ngIf="coinTicker; else noData">NT$ {{ coinTicker.circulating_supply | numberFormat }}</span>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #noData>尚無資訊</ng-template>

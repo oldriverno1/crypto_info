@@ -9,7 +9,7 @@ import { CurrencyTickersRequest, CurrencyTickersResp } from 'src/app/interfaces/
 })
 export class CoinDetailComponent implements OnInit {
   constructor(private backendService: BackendService) {}
-  private symbol = 'BTC';
+  symbol = 'BTC';
   coinTicker!: CurrencyTickersResp;
   ngOnInit(): void {
     this.getCoinDetail();
