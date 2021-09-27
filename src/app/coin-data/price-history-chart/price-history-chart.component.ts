@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
-import { KlineRequest, KlineResponseIndex } from '../coin-detail/coin-detail.component';
+import { KlineRequest, KlineResponseIndex } from 'src/app/interfaces/binance-kline';
+
 @Component({
   selector: 'app-price-history-chart',
   templateUrl: './price-history-chart.component.html',
