@@ -2,13 +2,13 @@
   background-color: inherit;
 }
 
-
-.module .collapse, .module .collapsing {
-  height: 3rem;  /* [NUM_OF_LINES] x [LINE_HEIGHT] */
+.module .collapse,
+.module .collapsing {
+  height: 3rem; /* [NUM_OF_LINES] x [LINE_HEIGHT] */
 }
 
 .module .collapse {
-  position: relative;  /* For ...'s content absolute positioning */
+  position: relative; /* For ...'s content absolute positioning */
   display: block;
   overflow: hidden;
 }
@@ -21,11 +21,11 @@
 }
 
 .module .collapse.show {
-  height: auto;  /* You need to reset the height when not collapsed */
+  height: auto; /* You need to reset the height when not collapsed */
 }
 
 .module .collapse.show:before {
-  display: none;  /* Of course you don't want to display ... */
+  display: none; /* Of course you don't want to display ... */
 }
 
 .module a.collapsed:after {
@@ -34,4 +34,10 @@
 
 .module a:not(.collapsed):after {
   content: '- Show Less';
+}
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+  tr:first-child {
+    border-top: hidden;
+  }
 }
