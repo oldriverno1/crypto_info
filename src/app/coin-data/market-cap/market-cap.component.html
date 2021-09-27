@@ -2,16 +2,20 @@
 <table class="table">
   <tbody>
     <tr>
-      <th scope="row">排名</th>
-      <td class="text-right">Mark</td>
+      <th scope="row">市值排名</th>
+      <td class="text-right">{{currencyTickersResp.rank}}</td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td class="text-right">Jacob</td>
+      <th scope="row">市值</th>
+      <td class="text-right">NT${{ currencyTickersResp.market_cap | numberFormat }}</td>
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td class="text-right">Larry</td>
+      <th scope="row">最大供給量</th>
+      <td class="text-right">{{ currencyTickersResp.max_supply | numberFormat }}</td>
+    </tr>
+    <tr>
+      <th scope="row">現貨流通量</th>
+      <td class="text-right">{{ currencyTickersResp.circulating_supply | numberFormat }}</td>
     </tr>
   </tbody>
 </table>
