@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ShareModule } from './../share/share.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -10,7 +11,14 @@ import { PriceChangeComponent } from './price-change/price-change.component';
 import { MarketCapComponent } from './market-cap/market-cap.component';
 import { DescriptionBlockComponent } from './description-block/description-block.component';
 @NgModule({
-  declarations: [CoinDetailComponent, OverallTableComponent, PriceHistoryChartComponent, PriceChangeComponent, MarketCapComponent, DescriptionBlockComponent],
-  imports: [CommonModule, FontAwesomeModule, ShareModule, HighchartsChartModule,ShareModule],
+  declarations: [
+    CoinDetailComponent,
+    OverallTableComponent,
+    PriceHistoryChartComponent,
+    PriceChangeComponent,
+    MarketCapComponent,
+    DescriptionBlockComponent,
+  ],
+  imports: [CommonModule, FontAwesomeModule, ShareModule, HighchartsChartModule, ShareModule, RouterModule],
 })
 export class CoinDataModule {}

@@ -5,7 +5,7 @@ import { CoinDetailComponent } from './coin-data/coin-detail/coin-detail.compone
 
 const routes: Routes = [
   { path: '', component: OverallTableComponent },
-  { path: 'coin-detail', component: CoinDetailComponent },
+  { path: 'coin-detail/:symbol', component: CoinDetailComponent },
 ];
 
 @NgModule({

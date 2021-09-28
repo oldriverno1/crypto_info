@@ -19,7 +19,7 @@ export interface CurrencyTickersResp {
   price_date: Date;
   price_timestamp: Date;
   circulating_supply: string;
-  max_supply: string;
+  max_supply?: string;
   market_cap: string;
   market_cap_dominance: string;
   num_exchanges: string;

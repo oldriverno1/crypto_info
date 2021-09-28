@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
 import { KlineRequest, KlineResponseIndex } from 'src/app/interfaces/binance-kline';
@@ -12,16 +12,22 @@ export class PriceHistoryChartComponent implements OnInit {
   constructor(private backendService: BackendService) {}
   readonly highcharts: typeof Highcharts = Highcharts; // required
   updateFlag = false;
-  chartOptions: Highcharts.Options = {
-    title: { text: 'BTC-USDT' },
-    credits: { enabled: false },
-    series: [{ data: [], type: 'line' }],
-    yAxis: { opposite: true, title: { text: '價格' } },
-  };
+  @Input() symbol!: string;
+  chartOptions!: Highcharts.Options;
 
   ngOnInit(): void {
     this.beforeChartInit();
+    this.setChartOptions();
     this.getPriceData();
+  }
+
+  private setChartOptions(): void {
+    this.chartOptions = {
+      title: { text: `${this.symbol}-USDT` },
+      credits: { enabled: false },
+      series: [{ data: [], type: 'line' }],
+      yAxis: { opposite: true, title: { text: '價格' } },
+    };
   }
 
   private beforeChartInit(): void {
@@ -29,7 +35,7 @@ export class PriceHistoryChartComponent implements OnInit {
   }
 
   private getPriceData(): void {
-    const klineRequest: KlineRequest = { symbol: 'BTCUSDT', interval: '1d' };
+    const klineRequest: KlineRequest = { symbol: `${this.symbol}USDT`, interval: '1d' };
     this.backendService
       .get<(number | string)[][]>(API_SOURCE.BINANCE, 'klines', klineRequest as unknown as Record<string, unknown>)
       .subscribe((priceData) => {
@@ -44,7 +50,7 @@ export class PriceHistoryChartComponent implements OnInit {
       xAxisCategories.push(new Date(data[KlineResponseIndex.closeTime]).toLocaleDateString('zh-Hans-CN'));
       closePrices.push(parseFloat(data[KlineResponseIndex.close] as string));
     }
-    this.chartOptions.series = [{ data: closePrices, type: 'line', name: 'BTCUSDT price' }];
+    this.chartOptions.series = [{ data: closePrices, type: 'line', name: `${this.symbol}USDT price` }];
     this.chartOptions.xAxis = { categories: xAxisCategories, tickInterval: 100 };
     this.updateFlag = true;
   }
