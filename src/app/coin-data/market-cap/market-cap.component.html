@@ -4,7 +4,7 @@
     <tr>
       <th scope="row">市值排名</th>
       <td class="text-right">
-        <span *ngIf="coinTicker; else noData">{{ coinTicker.rank }}</span>
+        <span *ngIf="coinTicker; else noData">#{{ coinTicker.rank }}</span>
       </td>
     </tr>
     <tr>
@@ -16,7 +16,7 @@
     <tr>
       <th scope="row">最大供給量</th>
       <td class="text-right">
-        <span *ngIf="coinTicker && !coinTicker.max_supply">∞ (unlimeited)</span>
+        <span *ngIf="coinTicker && !coinTicker.max_supply">∞ (unlimited)</span>
         <span *ngIf="coinTicker && coinTicker.max_supply">{{ coinTicker.max_supply | numberFormat }}</span>
         <span *ngIf="!coinTicker">尚無資訊</span>
       </td>

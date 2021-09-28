@@ -32,8 +32,8 @@ export class BackendService {
               return of(error).pipe(delay(1000));
             }
             console.error(error);
-            alert(`error with api: ${apiSource + apiName}`);
-            throw new Error(`error with api: ${apiSource + apiName}`);
+            // alert(`error with api: ${apiSource + apiName}`);
+            throw new Error(`api ${apiSource + apiName} error: ${JSON.stringify(error.error)}`);
           }),
           take(2)
         );

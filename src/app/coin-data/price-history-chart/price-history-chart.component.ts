@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
 import { KlineRequest, KlineResponseIndex } from 'src/app/interfaces/binance-kline';
-
+import NoDataToDisplay from 'highcharts/modules/no-data-to-display';
+NoDataToDisplay(Highcharts);
 @Component({
   selector: 'app-price-history-chart',
   templateUrl: './price-history-chart.component.html',
@@ -27,20 +28,29 @@ export class PriceHistoryChartComponent implements OnInit {
       credits: { enabled: false },
       series: [{ data: [], type: 'line' }],
       yAxis: { opposite: true, title: { text: '價格' } },
+      noData: {
+        style: {
+          fontWeight: 'bold',
+          fontSize: '15px',
+          color: '#303030',
+        },
+      },
     };
   }
 
   private beforeChartInit(): void {
-    this.highcharts.setOptions({ lang: { thousandsSep: ',' } });
+    this.highcharts.setOptions({ lang: { thousandsSep: ',', noData: `no data for ${this.symbol}-USDT` } });
   }
 
   private getPriceData(): void {
-    const klineRequest: KlineRequest = { symbol: `${this.symbol}USDT`, interval: '1d' };
+    const klineRequest: KlineRequest = { symbol: `${this.symbol}USDT`, interval: '1d', limit: 200 };
     this.backendService
       .get<(number | string)[][]>(API_SOURCE.BINANCE, 'klines', klineRequest as unknown as Record<string, unknown>)
-      .subscribe((priceData) => {
-        this.plotChart(priceData);
-      });
+      .subscribe(
+        (priceData) => {
+          this.plotChart(priceData);
+        }
+      );
   }
 
   private plotChart(priceData: (number | string)[][]): void {
@@ -51,7 +61,7 @@ export class PriceHistoryChartComponent implements OnInit {
       closePrices.push(parseFloat(data[KlineResponseIndex.close] as string));
     }
     this.chartOptions.series = [{ data: closePrices, type: 'line', name: `${this.symbol}USDT price` }];
-    this.chartOptions.xAxis = { categories: xAxisCategories, tickInterval: 100 };
+    this.chartOptions.xAxis = { categories: xAxisCategories, tickInterval: 40 };
     this.updateFlag = true;
   }
 }
