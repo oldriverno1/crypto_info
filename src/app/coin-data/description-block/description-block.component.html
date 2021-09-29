@@ -14,21 +14,21 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <table class="table mb-0">
+      <table class="table mb-0" style="table-layout: fixed">
         <tbody>
           <tr>
             <th scope="row">Currency Name</th>
-            <td class="text-right">{{ coinMetaData?.name }}</td>
+            <td>{{ coinMetaData?.name }}</td>
           </tr>
           <tr>
             <th scope="row">Website</th>
-            <td class="text-right">
+            <td>
               <a target="blank" [href]="coinMetaData?.website_url">{{ coinMetaData?.website_url }}</a>
             </td>
           </tr>
           <tr>
             <th scope="row">Whitepaper</th>
-            <td class="text-right">
+            <td>
               <a target="blank" [href]="coinMetaData?.whitepaper_url">{{ coinMetaData?.whitepaper_url }}</a>
             </td>
           </tr>
@@ -36,23 +36,23 @@
       </table>
     </div>
     <div class="col-md-6">
-      <table class="table">
+      <table class="table" style="table-layout: fixed">
         <tbody>
           <tr>
             <th scope="row">Github</th>
-            <td class="text-right">
+            <td>
               <a target="blank" [href]="coinMetaData?.github_url">{{ coinMetaData?.github_url }}</a>
             </td>
           </tr>
           <tr>
             <th scope="row">Twitter</th>
-            <td class="text-right">
+            <td>
               <a target="blank" [href]="coinMetaData?.twitter_url">{{ coinMetaData?.twitter_url }}</a>
             </td>
           </tr>
           <tr>
             <th scope="row">Reddit</th>
-            <td class="text-right">
+            <td class="text-left">
               <a target="blank" [href]="coinMetaData?.reddit_url">{{ coinMetaData?.reddit_url }}</a>
             </td>
           </tr>
