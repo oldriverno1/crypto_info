@@ -10,8 +10,15 @@ NoDataToDisplay(Highcharts);
   styleUrls: ['./price-history-chart.component.css'],
 })
 export class PriceHistoryChartComponent implements OnInit {
-  constructor(private backendService: BackendService) {}
+  constructor(private backendService: BackendService) {
+    this.chartCallback = (chart: Highcharts.Chart) => {
+      this.chartInstance = chart;
+      this.getPriceData();
+    };
+  }
   readonly highcharts: typeof Highcharts = Highcharts; // required
+  chartCallback: (chart: Highcharts.Chart) => void;
+  chartInstance!: Highcharts.Chart;
   updateFlag = false;
   @Input() symbol!: string;
   chartOptions!: Highcharts.Options;
@@ -19,7 +26,6 @@ export class PriceHistoryChartComponent implements OnInit {
   ngOnInit(): void {
     this.beforeChartInit();
     this.setChartOptions();
-    this.getPriceData();
   }
 
   private setChartOptions(): void {
@@ -44,11 +50,22 @@ export class PriceHistoryChartComponent implements OnInit {
 
   private getPriceData(): void {
     const klineRequest: KlineRequest = { symbol: `${this.symbol}USDT`, interval: '1d', limit: 200 };
+    this.chartInstance.showLoading();
     this.backendService
       .get<(number | string)[][]>(API_SOURCE.BINANCE, 'klines', klineRequest as unknown as Record<string, unknown>)
       .subscribe(
         (priceData) => {
+          this.chartInstance.hideLoading();
           this.plotChart(priceData);
+        },
+        () => {
+          // not listed on binace
+          while (this.chartInstance.series.length) {
+            this.chartInstance.series[0].remove();
+          }
+          this.chartInstance.hideLoading();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this.chartInstance as any).showNoData(`${this.symbol}-USDT isn't listed on Binace`);
         }
       );
   }
