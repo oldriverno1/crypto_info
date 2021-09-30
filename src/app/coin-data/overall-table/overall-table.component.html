@@ -32,7 +32,8 @@
             <ng-template #arrowDown>
               <fa-icon class="price-down mr-1" [icon]="faCaretDown"></fa-icon>
             </ng-template>
-            <span [class]="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-down'"
+            <span
+              [class]="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-down'"
               >{{ (currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
             >
           </td>
@@ -45,3 +46,4 @@
 
   <app-pagination [totalPages]="totalPages" [pageSlideSize]="pageSlideSize" (pageEvent)="getData($event)"></app-pagination>
 </div>
+<app-loading *ngIf="isLoading"></app-loading>

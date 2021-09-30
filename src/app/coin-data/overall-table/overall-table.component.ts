@@ -15,11 +15,13 @@ export class OverallTableComponent implements OnInit {
   readonly faCaretUp: IconDefinition = faCaretUp;
   readonly faCaretDown: IconDefinition = faCaretDown;
   currencyTickers!: CurrencyTickersResp[];
+  isLoading = false;
   ngOnInit(): void {
     this.getData(1);
   }
 
   getData(pageIndex: number): void {
+    this.isLoading = true;
     const currencyTickersRequest: CurrencyTickersRequest = {
       'per-page': this.dataPerPage,
       convert: 'TWD',
@@ -27,16 +29,19 @@ export class OverallTableComponent implements OnInit {
       status: 'active',
     };
     this.backendService
-      .get<CurrencyTickersResp[]>(
-        API_SOURCE.NOMICS,
-        'currencies/ticker',
-        currencyTickersRequest as Record<string, unknown>
-      )
-      .subscribe((data) => {
-        console.log(data);
-        this.currencyTickers = data;
-      });
+      .get<CurrencyTickersResp[]>(API_SOURCE.NOMICS, 'currencies/ticker', currencyTickersRequest as Record<string, unknown>)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.currencyTickers = data;
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
   }
 }
-
-
