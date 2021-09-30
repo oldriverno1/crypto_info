@@ -12,56 +12,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let currencyTicker of currencyTickers; index as i">
-          <th scope="row">{{ currencyTicker.rank }}</th>
+        <tr *ngFor="let data of [].constructor(dataPerPage); index as i">
+          <th scope="row">{{ currencyTickers[i].rank }}</th>
           <td class="text-nowrap stick-left" width="5%">
-            <a [routerLink]="['/coin-detail', currencyTicker.symbol]" routerLinkActive="router-link-active">
-              <img class="coin-logo mr-1" [src]="currencyTicker.logo_url" />{{ currencyTicker.name }}&nbsp;<span
+            <a [routerLink]="['/coin-detail', currencyTickers[i].symbol]" routerLinkActive="router-link-active">
+              <img class="coin-logo mr-1" [src]="currencyTickers[i].logo_url" />{{ currencyTickers[i].name }}&nbsp;<span
                 class="light-gray"
-                >{{ currencyTicker.symbol }}</span
+                >{{ currencyTickers[i].symbol }}</span
               ></a
             >
           </td>
-          <td class="text-right">NT${{ currencyTicker.price | numberFormat }}</td>
-          <!-- <td class="text-nowrap text-right">
-            <fa-icon
-              class="price-up mr-1"
-              *ngIf="
-                (currencyTicker['1d'].price_change_pct | stringToNumber: 'float') > 0;
-                else arrowDown
-              "
-              [icon]="faCaretUp"
-            ></fa-icon>
-            <ng-template #arrowDown>
-              <fa-icon class="price-down mr-1" [icon]="faCaretDown"></fa-icon>
-            </ng-template>
-            <span
-              [class]="
-                (currencyTicker['1d'].price_change_pct | stringToNumber: 'float') > 0
-                  ? 'price-up'
-                  : 'price-down'
-              "
-              >{{
-                (currencyTicker['1d'].price_change_pct | stringToNumber: 'float') * 100
-                  | numberFormat
-              }}%</span
-            >
-          </td> -->
+          <td class="text-right">NT${{ currencyTickers[i].price | numberFormat }}</td>
           <td class="text-nowrap text-right">
             <fa-icon
               class="price-up mr-1"
-              *ngIf="(currencyTicker['7d'].price_change_pct | stringToNumber: 'float') > 0; else arrowDown"
+              *ngIf="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0; else arrowDown"
               [icon]="faCaretUp"
             ></fa-icon>
             <ng-template #arrowDown>
               <fa-icon class="price-down mr-1" [icon]="faCaretDown"></fa-icon>
             </ng-template>
-            <span [class]="(currencyTicker['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-down'"
-              >{{ (currencyTicker['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
+            <span [class]="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-down'"
+              >{{ (currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
             >
           </td>
-          <td class="text-right">NT${{ currencyTicker['7d'].volume | numberFormat }}</td>
-          <td class="text-right">NT${{ currencyTicker.market_cap | numberFormat }}</td>
+          <td class="text-right">NT${{ currencyTickers[i]['7d'].volume | numberFormat }}</td>
+          <td class="text-right">NT${{ currencyTickers[i].market_cap | numberFormat }}</td>
         </tr>
       </tbody>
     </table>
