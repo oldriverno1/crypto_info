@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { NewsMarqueeComponent } from './news-marquee/news-marquee.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  exports: [NewsMarqueeComponent],
+  declarations: [NewsMarqueeComponent],
+  imports: [CommonModule],
 })
-export class NewsModule { }
+export class NewsModule {}

@@ -1,3 +1,4 @@
+import { NewsModule } from './news/news.module';
 import { OuterTemplateModule } from './outer-template/outer-template.module';
 import { CoinDataModule } from './coin-data/coin-data.module';
 import { CommonModule } from '@angular/common';
@@ -18,7 +19,8 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HttpClientModule,
     OuterTemplateModule,
-    CoinDataModule
+    CoinDataModule,
+    NewsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
