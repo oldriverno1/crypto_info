@@ -21,8 +21,9 @@ export class NewsMarqueeComponent implements OnInit {
   private getNews(): void {
     const dateFormat = 'YYYY-MM-DD';
     const newsRequest: NewsRequest = {
-      date: `${moment().subtract(7, 'days').format(dateFormat)},${moment().format(dateFormat)}`,
+      date: `${moment().subtract(3, 'days').format(dateFormat)},${moment().format(dateFormat)}`,
       languages: 'en',
+      keywords: 'crypto',
     };
     this.backendService
       .get<NewsResponse>(API_SOURCE.NEWS, 'news', newsRequest as unknown as Record<string, unknown>)
