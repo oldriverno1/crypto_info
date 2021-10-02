@@ -9,6 +9,7 @@ import { webSocket } from 'rxjs/webSocket';
 export class BackendService {
   constructor(private httpClient: HttpClient) {}
   private readonly NOMICS_KEY: string = '78f51ac49b5a2f483772daebcf27519e8b59988d';
+  private readonly NEWS_KEY: string = '9f670405dacb473081378a86077fbd55';
   private readonly TOO_MANY_REQUESTS: number = 429;
   post<T>(apiSource: API_SOURCE, apiName: string, params: Record<string, unknown>): Observable<T> {
     return this.httpClient.post<T>(apiSource + apiName, params).pipe(
@@ -23,6 +24,7 @@ export class BackendService {
     params = {
       ...params,
       ...(apiSource === API_SOURCE.NOMICS && { key: this.NOMICS_KEY }),
+      ...(apiSource === API_SOURCE.NEWS && { apiKey: this.NEWS_KEY }),
     };
     return this.httpClient.get<T>(apiSource + apiName, { params: params as unknown as HttpParams }).pipe(
       retryWhen((observable) => {
@@ -56,4 +58,5 @@ export enum API_SOURCE {
   BINANCE = 'https://oldriverno1-proxy.herokuapp.com/https://api.binance.com/api/v3/',
   NOMICS = 'https://api.nomics.com/v1/',
   BINANCE_SOCKET = 'wss://stream.binance.com:9443',
+  NEWS = 'https://oldriverno1-proxy.herokuapp.com/https://newsapi.org/v2/',
 }
