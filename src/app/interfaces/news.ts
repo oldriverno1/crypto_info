@@ -23,14 +23,14 @@ export interface Pagination {
   total: number;
 }
 
-export interface NewsRequest{
-  date:string
-  sources?:string
-  categories?:string
-  countries?:string
-  languages?:string
-  keywords?:string
-  sort?:string
-  limit?:string
-  offset?:string
+export interface NewsRequest {
+  date: string;
+  sources?: string;
+  categories?: string;
+  countries?: string;
+  languages?: string;
+  keywords?: string;
+  sort?: string;
+  limit?: number;
+  offset?: string;
 }

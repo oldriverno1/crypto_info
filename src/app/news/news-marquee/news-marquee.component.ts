@@ -1,9 +1,7 @@
-import { NewsRequest } from './../../interfaces/news';
-import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
+import { NewsService } from './../news.service';
 import { Component, OnInit } from '@angular/core';
-import { NewsData, NewsResponse } from 'src/app/interfaces/news';
-import * as moment from 'moment';
-import { map } from 'rxjs/operators';
+import { NewsData } from 'src/app/interfaces/news';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-news-marquee',
@@ -12,24 +10,21 @@ import { map } from 'rxjs/operators';
 })
 export class NewsMarqueeComponent implements OnInit {
   news!: NewsData[];
-  constructor(private backendService: BackendService) {}
+  constructor(private newsService: NewsService) {}
 
   ngOnInit(): void {
     this.getNews();
   }
 
   private getNews(): void {
-    const dateFormat = 'YYYY-MM-DD';
-    const newsRequest: NewsRequest = {
-      date: `${moment().subtract(3, 'days').format(dateFormat)},${moment().format(dateFormat)}`,
-      languages: 'en',
-      keywords: 'crypto',
-    };
-    this.backendService
-      .get<NewsResponse>(API_SOURCE.NEWS, 'news', newsRequest as unknown as Record<string, unknown>)
-      .pipe(map((response) => response.data))
-      .subscribe((news) => {
-        this.news = news;
+    this.newsService
+      .getNews()
+      .pipe(
+        take(1),
+        map((response) => response.data)
+      )
+      .subscribe((newsData) => {
+        this.news = newsData;
       });
   }
 }
