@@ -23,7 +23,16 @@ export class NewsCarouselComponent implements OnInit {
         map((newsResp) => newsResp.data)
       )
       .subscribe((news) => {
-        this.news = news.slice(0, 20).filter((news) => news.image && news.url);
+        const validExtension: ReadonlyArray<string> = ['png', 'jpg', 'jpeg'];
+        this.news = news.slice(0, 40).filter((news) => news.image && validExtension.includes(this.getExtension(news.image)));
       });
+  }
+
+  private getExtension(url: string | null): string {
+    if (!url) {
+      return '';
+    }
+    const extension: string | undefined = url.split(/[#?]/)[0].split('.').pop()?.trim();
+    return extension ? extension : '';
   }
 }

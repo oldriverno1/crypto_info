@@ -28,7 +28,7 @@ export class NewsService {
       date: `${moment().subtract(3, 'days').format(dateFormat)},${moment().format(dateFormat)}`,
       languages: 'en',
       keywords: 'crypto',
-      limit: 50,
+      limit: 100,
     };
   }
 }
