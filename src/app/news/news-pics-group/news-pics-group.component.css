@@ -1,0 +1,19 @@
+.card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+img {
+  object-fit: cover;
+  min-height: 170px;
+}
+.card-title{
+  max-height: calc(1em * 1.4 * 2);
+  line-height: 1.4;
+  display: inline-block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

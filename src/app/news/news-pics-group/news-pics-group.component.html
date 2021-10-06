@@ -1,0 +1,20 @@
+<ng-container *ngIf="news">
+  <div class="row">
+    <div class="col-12 col-md-3 mb-3" *ngFor="let blank of [].constructor(12); index as i">
+      <div class="card">
+        <a [href]="news[i].url" target="blank">
+          <img class="card-img-top" [src]="news[i].image" [alt]="news[i].title" />
+        </a>
+
+        <div class="card-body">
+          <a [href]="news[i].url" target="blank" [title]="news[i].title">
+            <h5 class="card-title">{{ news[i].title }}</h5>
+          </a>
+
+          <!-- <p class="card-text">{{ news[0].description }}</p> -->
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
