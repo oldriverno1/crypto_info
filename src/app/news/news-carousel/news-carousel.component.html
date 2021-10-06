@@ -8,7 +8,7 @@
         [class.active]="i === 0"
       ></li>
     </ol>
-    <div class="carousel-inner" *ngIf="news">
+    <div class="carousel-inner" >
       <ng-container *ngFor="let data of news; index as i">
         <div class="carousel-item" [class.active]="i === 0">
           <a [href]="data.url" target="blank"><img class="d-block w-100" [src]="data.image" [alt]="i + 'slide'" />

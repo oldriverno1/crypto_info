@@ -9,7 +9,7 @@ import { webSocket } from 'rxjs/webSocket';
 export class BackendService {
   constructor(private httpClient: HttpClient) {}
   private readonly NOMICS_KEY: string = '78f51ac49b5a2f483772daebcf27519e8b59988d';
-  private readonly NEWS_KEY: string = '1a0cdc13ad4f0c780e6b11b9466fcff5';
+  private readonly NEWS_KEY: string = 'fc2b94a262a29fe9f0951d52ac924b02';
   private readonly TOO_MANY_REQUESTS: number = 429;
   post<T>(apiSource: API_SOURCE, apiName: string, params: Record<string, unknown>): Observable<T> {
     return this.httpClient.post<T>(apiSource + apiName, params).pipe(

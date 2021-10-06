@@ -1,0 +1,7 @@
+<ul class="list-group list-group-flush" *ngIf="news">
+  <ng-container *ngFor="let blank of [].constructor(7); index as i">
+    <li class="list-group-item news-link">
+      <a [href]="news[i].url" target="blank" [title]="news[i].title">{{ news[i].title }}</a>
+    </li>
+  </ng-container>
+</ul>
