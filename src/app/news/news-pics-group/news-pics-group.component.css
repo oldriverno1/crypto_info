@@ -6,10 +6,33 @@
 
 img {
   object-fit: cover;
+}
+
+.card img {
   min-height: 170px;
   max-height: 170px;
 }
-.card-title{
+
+.list-group-text {
+  -webkit-line-clamp: 3;
+  line-height: 1.25;
+  max-height: calc(1em * 1.25 * 3);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.list-group img {
+  max-width: 100%;
+  width: 125px;
+  height: 90px;
+}
+
+.list-group a {
+  border: 0;
+}
+
+.card-title {
   max-height: calc(1em * 1.4 * 2);
   line-height: 1.4;
   display: inline-block;

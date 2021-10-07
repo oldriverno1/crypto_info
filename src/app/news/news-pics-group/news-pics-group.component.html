@@ -1,7 +1,7 @@
 <ng-container *ngIf="news">
-  <div class="row">
+  <div class="row ">
     <ng-container *ngFor="let blank of [].constructor(12); index as i">
-      <div class="col-12 col-md-3 mb-3" *ngIf="news[i]">
+      <div class="d-none d-md-block col-md-3 mb-3" *ngIf="news[i]">
         <div class="card">
           <a [href]="news[i].url" target="blank">
             <img class="card-img-top" [src]="news[i].image" [alt]="news[i].title" />
@@ -18,5 +18,35 @@
         </div>
       </div>
     </ng-container>
+  </div>
+  <div class="d-block d-md-none">
+    <div class="list-group">
+      <div class="row">
+        <ng-container *ngFor="let blank of [].constructor(12) ;index as i">
+          <ng-container *ngIf="news[i]">
+            <div class="col-4 mb-3 pr-0">
+              <img [src]="news[i].image" alt="">
+            </div>
+            <a [href]="news[i].url" [title]="news[i].title" target="blank"
+              class="list-group-item list-group-item-action flex-column align-items-start col-8 list-group-text">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{news[i].title}}</h5>
+                <small>3 days ago</small>
+              </div>
+              <!-- <small>Donec id elit non mi porta.</small> -->
+            </a>
+          </ng-container>
+        </ng-container>
+      </div>
+      <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">List group item heading</h5>
+          <small class="text-muted">3 days ago</small>
+        </div>
+        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+        </p>
+        <small class="text-muted">Donec id elit non mi porta.</small>
+      </a> -->
+    </div>
   </div>
 </ng-container>
