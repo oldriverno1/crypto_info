@@ -7,6 +7,7 @@
 img {
   object-fit: cover;
   min-height: 170px;
+  max-height: 170px;
 }
 .card-title{
   max-height: calc(1em * 1.4 * 2);
