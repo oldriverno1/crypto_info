@@ -11,18 +11,24 @@ export class NewsUtils {
       .getNews()
       .pipe(
         take(1),
-        map((newsResp) => newsResp.data)
+        map((newsResp) => this.removeDuplicateTitle(newsResp.data))
       )
-      .subscribe((news) => {
+      .subscribe((allNews) => {
         const validExtension: ReadonlyArray<string> = ['png', 'jpg', 'jpeg'];
-
-        this.news = news.slice(startIndex, endIndex).filter((news) => {
+        this.news = allNews.slice(startIndex, endIndex).filter((news) => {
           if (withPicture) {
             return news.image && validExtension.includes(this.getExtension(news.image));
           }
           return !(news.image && validExtension.includes(this.getExtension(news.image)));
         });
       });
+  }
+
+  private removeDuplicateTitle(allNews: NewsData[]): NewsData[] {
+    const newsTitlesSet = new Set<string>();
+    return allNews.filter(
+      (news) => !newsTitlesSet.has(news.title) && newsTitlesSet.add(news.title)
+    );
   }
 
   private getExtension(url: string | null): string {
