@@ -1,6 +1,6 @@
 import { CoinDataCacheService } from './../coin-data-cache.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CurrencyTickersResp } from 'src/app/interfaces/currency-ticker';
 import { take } from 'rxjs/operators';
 
@@ -10,7 +10,13 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./coin-detail.component.css'],
 })
 export class CoinDetailComponent implements OnInit {
-  constructor(private coinDataCache: CoinDataCacheService, private route: ActivatedRoute) { }
+  constructor(
+    private coinDataCache: CoinDataCacheService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
   symbol = '';
   coinTicker!: CurrencyTickersResp;
   ngOnInit(): void {
@@ -27,8 +33,11 @@ export class CoinDetailComponent implements OnInit {
   }
 
   private getCoinDetail(): void {
-    this.coinDataCache.getCoinById(this.symbol).pipe(take(1)).subscribe((coinData) => {
-      this.coinTicker = coinData;
-    });
+    this.coinDataCache
+      .getCoinById(this.symbol)
+      .pipe(take(1))
+      .subscribe((coinData) => {
+        this.coinTicker = coinData;
+      });
   }
 }

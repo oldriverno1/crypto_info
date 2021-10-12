@@ -6,13 +6,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent implements OnInit {
-  currentPage = 1;
+  currentPage!: number;
   @Input() totalPages!: number;
   @Input() pageSlideSize!: number;
   @Output() private pageEvent = new EventEmitter<number>();
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initPage();
+  }
+
+  private initPage(): void {
+    const previousPage: string | null = window.sessionStorage.getItem('pageIndex');
+    this.currentPage = previousPage ? parseInt(previousPage) : 1;
+    this.emitThisPage(this.currentPage);
+  }
 
   getPagination(): number[] {
     return [...Array(this.pageSlideSize).keys()].map(
@@ -23,6 +31,7 @@ export class PaginationComponent implements OnInit {
 
   emitThisPage(pageIndex: number): void {
     this.currentPage = pageIndex;
+    window.sessionStorage.setItem('pageIndex', pageIndex.toString());
     this.pageEvent.emit(this.currentPage);
   }
 }
