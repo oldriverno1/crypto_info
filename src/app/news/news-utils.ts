@@ -30,6 +30,6 @@ export class NewsUtils {
       return '';
     }
     const extension: string | undefined = url.split(/[#?]/)[0].split('.').pop()?.trim();
-    return extension ? extension : '';
+    return extension ?? '';
   }
 }

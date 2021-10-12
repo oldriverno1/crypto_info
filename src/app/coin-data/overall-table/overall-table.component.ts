@@ -1,14 +1,15 @@
+import { CoinDataCacheService } from './../coin-data-cache.service';
 import { Component, OnInit } from '@angular/core';
-import { BackendService, API_SOURCE } from 'src/app/core/backend.service';
 import { faCaretDown, faCaretUp, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { CurrencyTickersResp, CurrencyTickersRequest } from 'src/app/interfaces/currency-ticker';
+import { CurrencyTickersResp } from 'src/app/interfaces/currency-ticker';
+import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-overall-table',
   templateUrl: './overall-table.component.html',
   styleUrls: ['./overall-table.component.css'],
 })
 export class OverallTableComponent implements OnInit {
-  constructor(private backendService: BackendService) {}
+  constructor(private coinDataCache: CoinDataCacheService) { }
   readonly totalPages: number = 80;
   readonly dataPerPage: number = 10;
   readonly pageSlideSize: number = 5;
@@ -22,26 +23,17 @@ export class OverallTableComponent implements OnInit {
 
   getData(pageIndex: number): void {
     this.isLoading = true;
-    const currencyTickersRequest: CurrencyTickersRequest = {
-      'per-page': this.dataPerPage,
-      convert: 'TWD',
-      page: pageIndex,
-      status: 'active',
-    };
-    this.backendService
-      .get<CurrencyTickersResp[]>(API_SOURCE.NOMICS, 'currencies/ticker', currencyTickersRequest as Record<string, unknown>)
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.currencyTickers = data;
-          this.isLoading = false;
-        },
+    this.coinDataCache
+      .getPage(pageIndex).pipe(take(1)).subscribe((data) => {
+        console.log(data);
+        this.currencyTickers = data;
+        this.isLoading = false;
+      },
         () => {
           this.isLoading = false;
         },
         () => {
           this.isLoading = false;
-        }
-      );
+        });
   }
 }

@@ -1,7 +1,8 @@
+import { CoinDataCacheService } from './../coin-data-cache.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
-import { CurrencyTickersRequest, CurrencyTickersResp } from 'src/app/interfaces/currency-ticker';
+import { CurrencyTickersResp } from 'src/app/interfaces/currency-ticker';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-coin-detail',
@@ -9,8 +10,8 @@ import { CurrencyTickersRequest, CurrencyTickersResp } from 'src/app/interfaces/
   styleUrls: ['./coin-detail.component.css'],
 })
 export class CoinDetailComponent implements OnInit {
-  constructor(private backendService: BackendService, private route: ActivatedRoute) {}
-  symbol = 'BTC';
+  constructor(private coinDataCache: CoinDataCacheService, private route: ActivatedRoute) { }
+  symbol = '';
   coinTicker!: CurrencyTickersResp;
   ngOnInit(): void {
     this.symbol = this.getRouterParam();
@@ -26,11 +27,8 @@ export class CoinDetailComponent implements OnInit {
   }
 
   private getCoinDetail(): void {
-    const currencyTickersRequest: CurrencyTickersRequest = { ids: this.symbol };
-    this.backendService
-      .get<CurrencyTickersResp[]>(API_SOURCE.NOMICS, 'currencies/ticker', currencyTickersRequest as Record<string, unknown>)
-      .subscribe((response) => {
-        this.coinTicker = response[0];
-      });
+    this.coinDataCache.getCoinById(this.symbol).pipe(take(1)).subscribe((coinData) => {
+      this.coinTicker = coinData;
+    });
   }
 }
