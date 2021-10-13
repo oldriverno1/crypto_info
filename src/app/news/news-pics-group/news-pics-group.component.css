@@ -16,7 +16,7 @@ img {
 .list-group-text {
   -webkit-line-clamp: 3;
   line-height: 1.25;
-  max-height: calc(1em * 1.25 * 3);
+  /* max-height: calc(1em * 1.25 * 3); */
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -48,4 +48,11 @@ img {
 }
 a:hover {
   text-decoration: none;
+}
+
+.small-news-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
