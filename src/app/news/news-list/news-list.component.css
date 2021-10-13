@@ -1,7 +1,34 @@
-.news-link{
+li a {
+  -webkit-box-orient: vertical;
+  flex-flow: column wrap;
+  transition: color 0.3s linear;
+  line-height: 1.35;
+  display: flex;
+  -webkit-box-direction: normal;
+}
+
+.title-time {
+  transform-origin: left;
+  line-height: 1;
+  transform: scale(0.75);
+  color: #999;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.news-title {
+  font-size: 16px;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
+  color: black;
+  font-weight: 460;
+}
+
+.news-title:hover {
+  color: #2f76aa;
 }

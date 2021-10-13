@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { NewsUtils } from '../news-utils';
 import { NewsService } from '../news.service';
 
@@ -14,5 +15,9 @@ export class NewsListComponent extends NewsUtils implements OnInit {
 
   ngOnInit(): void {
     this.getNews(0, 40, false);
+  }
+
+  timeFormat(date: Date): string {
+    return moment(date).format('MM/DD HH:mm');
   }
 }
