@@ -40,4 +40,12 @@ img {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  color: black;
+}
+
+.card-title:hover {
+  color: #2f76aa;
+}
+a:hover {
+  text-decoration: none;
 }

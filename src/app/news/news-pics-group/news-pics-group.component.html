@@ -2,12 +2,12 @@
   <div class="row ">
     <ng-container *ngFor="let blank of [].constructor(12); index as i">
       <div class="d-none d-md-block col-md-3 mb-3" *ngIf="news[i]">
-        <div class="card">
+        <div class="card border-0">
           <a [href]="news[i].url" target="blank">
             <img class="card-img-top" [src]="news[i].image" [alt]="news[i].title" />
           </a>
 
-          <div class="card-body">
+          <div class="card-body p-0">
             <a [href]="news[i].url" target="blank" [title]="news[i].title">
               <h5 class="card-title">{{ news[i].title }}</h5>
             </a>
