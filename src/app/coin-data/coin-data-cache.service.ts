@@ -1,7 +1,7 @@
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { API_SOURCE, BackendService } from 'src/app/core/backend.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CurrencyTickersRequest, CurrencyTickersResp } from '../interfaces/currency-ticker';
 
 @Injectable({
@@ -35,7 +35,12 @@ export class CoinDataCacheService {
         status: 'active',
       };
       pageData$ = this.backendService
-        .get<CurrencyTickersResp[]>(API_SOURCE.NOMICS, this.CURRENCY_TICKER_API, currencyTickersRequest as Record<string, unknown>).pipe(shareReplay());
+        .get<CurrencyTickersResp[]>(API_SOURCE.NOMICS, this.CURRENCY_TICKER_API, currencyTickersRequest as Record<string, unknown>).pipe(shareReplay(),
+          tap((currencyTickers) => {
+            currencyTickers.forEach((coin) => {
+              this.cacheByIdMap.set(coin.id, new BehaviorSubject<CurrencyTickersResp>(coin).asObservable());
+            });
+          }));
       this.cacheByPageMap.set(pageIndex, pageData$);
     }
     return pageData$;

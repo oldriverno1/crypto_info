@@ -18,9 +18,9 @@ export class OverallTableComponent implements OnInit {
   currencyTickers!: CurrencyTickersResp[];
   isLoading = false;
   ngOnInit(): void {
-    this.getData(1);
   }
 
+  // let pagination emit to trigger the first call
   getData(pageIndex: number): void {
     this.isLoading = true;
     this.coinDataCache
