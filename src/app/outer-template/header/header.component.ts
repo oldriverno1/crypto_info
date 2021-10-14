@@ -2,6 +2,7 @@ import { take } from 'rxjs/operators';
 import { CoinDataCacheService } from './../../coin-data/coin-data-cache.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CurrencyTickersResp } from 'src/app/interfaces/currency-ticker';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +14,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private coinDataCache: CoinDataCacheService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   searchCoin(coinTicker: string): void {
     this.loading = true;
@@ -24,11 +25,22 @@ export class HeaderComponent implements OnInit {
       .pipe(take(1))
       .subscribe((data) => {
         this.loading = false;
-        if (!data) {
-          alert(`currency: ${coinTicker} not found`);
+        if (!this.isValidSymbol(data, coinTicker)) {
           return;
         }
         this.router.navigate(['/coin-detail', coinTicker]);
       });
+  }
+
+  private isValidSymbol(data: CurrencyTickersResp, coinTicker: string): boolean {
+    if (!data) {
+      alert(`currency: ${coinTicker} not found`);
+      return false;
+    }
+    if (data.status === 'inactive') {
+      alert(`currency: ${coinTicker} is inactive`);
+      return false;
+    }
+    return true;
   }
 }

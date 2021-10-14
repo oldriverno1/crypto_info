@@ -18,7 +18,7 @@
       <td class="text-right">
         <span *ngIf="coinTicker && !coinTicker.max_supply">∞ (unlimited)</span>
         <span *ngIf="coinTicker && coinTicker.max_supply">{{ coinTicker.max_supply | numberFormat }}</span>
-        <span *ngIf="!coinTicker">尚無資訊</span>
+        <span *ngIf="!coinTicker">no Data</span>
       </td>
     </tr>
     <tr>
@@ -30,4 +30,4 @@
   </tbody>
 </table>
 
-<ng-template #noData>尚無資訊</ng-template>
+<ng-template #noData>no Data</ng-template>

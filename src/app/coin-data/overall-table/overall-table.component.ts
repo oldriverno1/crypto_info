@@ -10,7 +10,7 @@ import { take } from 'rxjs/operators';
 })
 export class OverallTableComponent implements OnInit {
   constructor(private coinDataCache: CoinDataCacheService) { }
-  readonly totalPages: number = 80;
+  readonly totalPages: number = 50;
   readonly dataPerPage: number = 10;
   readonly pageSlideSize: number = 5;
   readonly faCaretUp: IconDefinition = faCaretUp;

@@ -2,15 +2,10 @@
   <h5 class="card-header">About {{ coinMetaData?.name }}</h5>
   <div class="card-body module">
     <!-- <h5 class="card-title">Special title treatment</h5> -->
-    <p class="card-text collapse" id="description-collapse" aria-expanded="false">{{ coinMetaData?.description }}</p>
-    <a
-      role="button"
-      class="collapsed"
-      data-toggle="collapse"
-      href="#description-collapse"
-      aria-expanded="false"
-      aria-controls="description-collapse"
-    ></a>
+    <p class="card-text collapse" id="description-collapse" aria-expanded="false">
+      {{ coinMetaData?.description !== '' ? coinMetaData?.description : 'No Description' }}</p>
+    <a *ngIf="coinMetaData?.description" role="button" class="collapsed" data-toggle="collapse"
+      href="#description-collapse" aria-expanded="false" aria-controls="description-collapse"></a>
   </div>
   <div class="row">
     <div class="col-md-6">
@@ -23,13 +18,15 @@
           <tr>
             <th scope="row">Website</th>
             <td>
-              <a target="blank" [href]="coinMetaData?.website_url">{{ coinMetaData?.website_url }}</a>
+              <a target="blank" [class.disabled]="!coinMetaData?.website_url"
+                [href]="coinMetaData?.website_url">{{ coinMetaData?.website_url !== '' ? coinMetaData?.website_url : 'X' }}</a>
             </td>
           </tr>
           <tr>
             <th scope="row">Whitepaper</th>
             <td>
-              <a target="blank" [href]="coinMetaData?.whitepaper_url">{{ coinMetaData?.whitepaper_url }}</a>
+              <a target="blank" [class.disabled]="!coinMetaData?.whitepaper_url"
+                [href]="coinMetaData?.whitepaper_url">{{ coinMetaData?.whitepaper_url !== '' ? coinMetaData?.whitepaper_url : 'X' }}</a>
             </td>
           </tr>
         </tbody>
@@ -41,19 +38,22 @@
           <tr>
             <th scope="row">Github</th>
             <td>
-              <a target="blank" [href]="coinMetaData?.github_url">{{ coinMetaData?.github_url }}</a>
+              <a target="blank" [class.disabled]="!coinMetaData?.github_url"
+                [href]="coinMetaData?.github_url">{{ coinMetaData?.github_url !== '' ? coinMetaData?.github_url : 'X' }}</a>
             </td>
           </tr>
           <tr>
             <th scope="row">Twitter</th>
             <td>
-              <a target="blank" [href]="coinMetaData?.twitter_url">{{ coinMetaData?.twitter_url }}</a>
+              <a target="blank" [class.disabled]="!coinMetaData?.twitter_url"
+                [href]="coinMetaData?.twitter_url">{{ coinMetaData?.twitter_url !== '' ? coinMetaData?.twitter_url : 'X' }}</a>
             </td>
           </tr>
           <tr>
             <th scope="row">Reddit</th>
             <td class="text-left">
-              <a target="blank" [href]="coinMetaData?.reddit_url">{{ coinMetaData?.reddit_url }}</a>
+              <a target="blank" [class.disabled]="!coinMetaData?.reddit_url"
+                [href]="coinMetaData?.reddit_url">{{ coinMetaData?.reddit_url !== '' ? coinMetaData?.reddit_url : 'X' }}</a>
             </td>
           </tr>
         </tbody>
