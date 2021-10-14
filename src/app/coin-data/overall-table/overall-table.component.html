@@ -16,26 +16,26 @@
           <th scope="row">{{ currencyTickers[i].rank }}</th>
           <td class="text-nowrap stick-left" width="5%">
             <a [routerLink]="['/coin-detail', currencyTickers[i].symbol]" routerLinkActive="router-link-active">
-              <img class="coin-logo mr-1" [src]="currencyTickers[i].logo_url" />{{ currencyTickers[i].name }}&nbsp;<span
-                class="light-gray"
-                >{{ currencyTickers[i].symbol }}</span
-              ></a
-            >
+              <span class="d-none d-md-block">
+                <img class="coin-logo mr-1" [src]="currencyTickers[i].logo_url" />
+                {{ currencyTickers[i].name }}&nbsp;
+                <span class="light-gray">{{ currencyTickers[i].symbol }}</span>
+              </span>
+              <span class="d-block d-md-none">
+                <img class="coin-logo mr-1" [src]="currencyTickers[i].logo_url" />{{ currencyTickers[i].symbol }}
+              </span>
+            </a>
           </td>
           <td class="text-right">${{ currencyTickers[i].price | numberFormat }}</td>
           <td class="text-nowrap text-right">
-            <fa-icon
-              class="price-up mr-1"
+            <fa-icon class="price-up mr-1"
               *ngIf="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0; else arrowDown"
-              [icon]="faCaretUp"
-            ></fa-icon>
+              [icon]="faCaretUp"></fa-icon>
             <ng-template #arrowDown>
               <fa-icon class="price-down mr-1" [icon]="faCaretDown"></fa-icon>
             </ng-template>
             <span
-              [class]="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-down'"
-              >{{ (currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
-            >
+              [class]="(currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') > 0 ? 'price-up' : 'price-down'">{{ (currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span>
           </td>
           <td class="text-right">${{ currencyTickers[i]['7d'].volume | numberFormat }}</td>
           <td class="text-right">${{ currencyTickers[i].market_cap | numberFormat }}</td>
@@ -44,6 +44,7 @@
     </table>
   </div>
 
-  <app-pagination [totalPages]="totalPages" [pageSlideSize]="pageSlideSize" (pageEvent)="getData($event)"></app-pagination>
+  <app-pagination [totalPages]="totalPages" [pageSlideSize]="pageSlideSize" (pageEvent)="getData($event)">
+  </app-pagination>
 </div>
 <app-loading *ngIf="isLoading"></app-loading>
