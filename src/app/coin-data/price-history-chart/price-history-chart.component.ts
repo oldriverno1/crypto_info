@@ -33,7 +33,7 @@ export class PriceHistoryChartComponent implements OnInit {
       title: { text: `${this.symbol}-USDT` },
       credits: { enabled: false },
       series: [{ data: [], type: 'line' }],
-      yAxis: { opposite: true, title: { text: '價格' } },
+      yAxis: { opposite: true, title: { text: 'price' } },
       noData: {
         style: {
           fontWeight: 'bold',

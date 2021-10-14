@@ -1,20 +1,20 @@
-<span class="title ml-2">市值資訊</span>
+<span class="title ml-2">Market Cap Info</span>
 <table class="table">
   <tbody>
     <tr>
-      <th scope="row">市值排名</th>
+      <th scope="row">rank</th>
       <td class="text-right">
         <span *ngIf="coinTicker; else noData">#{{ coinTicker.rank }}</span>
       </td>
     </tr>
     <tr>
-      <th scope="row">市值</th>
+      <th scope="row">market cap</th>
       <td class="text-right">
         <span *ngIf="coinTicker; else noData">$ {{ coinTicker.market_cap | numberFormat }}</span>
       </td>
     </tr>
     <tr>
-      <th scope="row">最大供給量</th>
+      <th scope="row">max supply</th>
       <td class="text-right">
         <span *ngIf="coinTicker && !coinTicker.max_supply">∞ (unlimited)</span>
         <span *ngIf="coinTicker && coinTicker.max_supply">{{ coinTicker.max_supply | numberFormat }}</span>
@@ -22,7 +22,7 @@
       </td>
     </tr>
     <tr>
-      <th scope="row">現貨流通量</th>
+      <th scope="row">circulating supply</th>
       <td class="text-right">
         <span *ngIf="coinTicker; else noData">{{ coinTicker.circulating_supply | numberFormat }}</span>
       </td>
