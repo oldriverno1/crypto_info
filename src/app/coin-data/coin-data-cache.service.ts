@@ -31,7 +31,6 @@ export class CoinDataCacheService {
     if (!pageData$) {
       const currencyTickersRequest: CurrencyTickersRequest = {
         'per-page': this.dataPerPage,
-        convert: 'TWD',
         page: pageIndex,
         status: 'active',
       };

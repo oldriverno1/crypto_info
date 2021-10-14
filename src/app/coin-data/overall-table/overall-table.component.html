@@ -22,7 +22,7 @@
               ></a
             >
           </td>
-          <td class="text-right">NT${{ currencyTickers[i].price | numberFormat }}</td>
+          <td class="text-right">${{ currencyTickers[i].price | numberFormat }}</td>
           <td class="text-nowrap text-right">
             <fa-icon
               class="price-up mr-1"
@@ -37,8 +37,8 @@
               >{{ (currencyTickers[i]['7d'].price_change_pct | stringToNumber: 'float') * 100 | numberFormat }}%</span
             >
           </td>
-          <td class="text-right">NT${{ currencyTickers[i]['7d'].volume | numberFormat }}</td>
-          <td class="text-right">NT${{ currencyTickers[i].market_cap | numberFormat }}</td>
+          <td class="text-right">${{ currencyTickers[i]['7d'].volume | numberFormat }}</td>
+          <td class="text-right">${{ currencyTickers[i].market_cap | numberFormat }}</td>
         </tr>
       </tbody>
     </table>

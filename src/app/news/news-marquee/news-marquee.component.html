@@ -1,7 +1,7 @@
 <div class="container">
   <div class="ticker" *ngIf="news">
     <div class="news">
-      <marquee class="news-content">
+      <marquee class="news-content" onmouseover="this.stop();" onmouseout="this.start();">
         <a *ngFor="let article of news" target="blank" [href]="article.url">
           <span class="dot"></span>{{ article.title }}
         </a>
