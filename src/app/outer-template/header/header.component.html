@@ -44,8 +44,8 @@
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" (input)="ticker.value=$any($event.target).value.toUpperCase()" type="search"
-          placeholder="enter symbol ex: BTC" #ticker aria-label="Search" />
-        <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchCoin(ticker.value)">Search</button>
+          placeholder="enter symbol ex: BTC" #ticker aria-label="Search" (keyup.enter)="searchCoin(ticker.value)" />
+        <button class="btn btn-outline-success my-2 my-sm-0"  (click)="searchCoin(ticker.value)">Search</button>
       </div>
     </div>
   </div>
