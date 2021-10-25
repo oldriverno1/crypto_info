@@ -4,13 +4,13 @@
     <tr>
       <th scope="row">rank</th>
       <td class="text-right">
-        <span *ngIf="coinTicker; else noData">#{{ coinTicker.rank }}</span>
+        <span *ngIf="coinTicker.rank; else noData">#{{ coinTicker.rank }}</span>
       </td>
     </tr>
     <tr>
       <th scope="row">market cap</th>
       <td class="text-right">
-        <span *ngIf="coinTicker; else noData">$ {{ coinTicker.market_cap | numberFormat }}</span>
+        <span *ngIf="coinTicker.market_cap; else noData">$ {{ coinTicker.market_cap | numberFormat }}</span>
       </td>
     </tr>
     <tr>
@@ -24,7 +24,7 @@
     <tr>
       <th scope="row">circulating supply</th>
       <td class="text-right">
-        <span *ngIf="coinTicker; else noData">{{ coinTicker.circulating_supply | numberFormat }}</span>
+        <span *ngIf="coinTicker.circulating_supply; else noData">{{ coinTicker.circulating_supply | numberFormat }}</span>
       </td>
     </tr>
   </tbody>
