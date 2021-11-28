@@ -21,7 +21,7 @@ export class DescriptionBlockComponent implements OnInit {
       .get<MetaDataResponse[]>(API_SOURCE.NOMICS, 'currencies', metaDataRequest as unknown as Record<string, unknown>)
       .subscribe((data) => {
         this.coinMetaData = data[0];
-        console.log(this.coinMetaData);
+        // console.log(this.coinMetaData);
       });
   }
 }

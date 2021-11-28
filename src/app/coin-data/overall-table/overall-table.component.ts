@@ -25,7 +25,7 @@ export class OverallTableComponent implements OnInit {
     this.isLoading = true;
     this.coinDataCache
       .getPage(pageIndex).pipe(take(1)).subscribe((data) => {
-        console.log(data);
+        // console.log(data);
         this.currencyTickers = data;
         this.isLoading = false;
       },
