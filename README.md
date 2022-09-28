@@ -1,6 +1,6 @@
 # CryptoInfo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
+Crypto Info presents data about crypto, including market cap, latest crypto news, price chart, description, and more
 
 ## Live Demo
 
